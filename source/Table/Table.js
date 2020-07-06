@@ -624,12 +624,10 @@ export default class Table extends React.PureComponent {
     } = this.props;
 
     const {scrollbarWidth} = this.state;
-
-    const rowClass =
-      typeof rowClassName === 'function' ? rowClassName({index}) : rowClassName;
-    const rowStyleObject =
-      typeof rowStyle === 'function' ? rowStyle({index}) : rowStyle;
     const rowData = rowGetter({index});
+    const rowClass = typeof rowClassName === 'function' ? rowClassName({index,rowData:rowData}) : rowClassName;
+    const rowStyleObject = typeof rowStyle === 'function' ? rowStyle({index,rowData:rowData}) : rowStyle;
+
 
     const columns = React.Children.toArray(children).map(
       (column, columnIndex) =>
